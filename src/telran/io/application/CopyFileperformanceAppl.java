@@ -21,7 +21,6 @@ public class CopyFileperformanceAppl {
             long size = Files.size(Path.of(pathoToSource));
             Arrays.stream(bufferLengthValues).map(bl -> getPerformanceTest(bl, size)).forEach(t -> t.run());
 
-            // Create instances of the three implementations and run their tests
             PerformanceTest testTransfer =
                     new CopyFilePerformanceTest(String.format("%s ; size:%d", "TransferToCopy", size),
                             1, pathoToSource, pathoToDestination, new TransferToCopy());
