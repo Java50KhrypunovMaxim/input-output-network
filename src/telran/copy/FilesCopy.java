@@ -19,7 +19,7 @@ public class FilesCopy implements CopyFile {
 
         try {
             Files.copy(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("Successful copying from " + pathToSource + " to " + pathToDestination);
+            //System.out.println("Successful copying from " + pathToSource + " to " + pathToDestination);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error occurred during file copying.");

@@ -16,11 +16,8 @@ public class CopyFileperformanceAppl {
     static final String pathoToDestination = "C:\\Documents\\Урок 50 - copy.mp4";
 
     public static void main(String[] args) {
-        Integer[] bufferLengthValues = { 1_000_000 };
         try {
             long size = Files.size(Path.of(pathoToSource));
-            Arrays.stream(bufferLengthValues).map(bl -> getPerformanceTest(bl, size)).forEach(t -> t.run());
-
             PerformanceTest testTransfer =
                     new CopyFilePerformanceTest(String.format("%s ; size:%d", "TransferToCopy", size),
                             1, pathoToSource, pathoToDestination, new TransferToCopy());
@@ -41,11 +38,4 @@ public class CopyFileperformanceAppl {
         }
     }
 
-    private static CopyFilePerformanceTest getPerformanceTest(Integer bl, long size) {
-        CopyFilePerformanceTest test =
-                new CopyFilePerformanceTest(String.format("%s implementation buffer length %d; size:%d",
-                        "FileCopy", bl, size),
-                        1, pathoToSource, pathoToDestination, new FilesCopy());
-        return test;
-    }
 }

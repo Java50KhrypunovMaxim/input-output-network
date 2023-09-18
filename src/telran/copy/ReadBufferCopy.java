@@ -19,7 +19,7 @@ public class ReadBufferCopy implements CopyFile {
                 outputStream.write(buffer, 0, bytesRead);
             }
 
-            System.out.println("Successful copying from " + pathToSource + " to " + pathToDestination);
+           // System.out.println("Successful copying from " + pathToSource + " to " + pathToDestination);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error occurred during file copying.");

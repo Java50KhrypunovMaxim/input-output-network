@@ -13,7 +13,7 @@ public class TransferToCopy implements CopyFile {
         try (InputStream input = new FileInputStream(pathToSource);
              OutputStream output = new FileOutputStream(pathToDestination)) {
             input.transferTo(output);
-            System.out.println("Successful copying from " + pathToSource + " to " + pathToDestination);
+          //  System.out.println("Successful copying from " + pathToSource + " to " + pathToDestination);
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Error occurred during file copying.");
