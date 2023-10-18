@@ -14,6 +14,7 @@ import telran.employee.SalaryDistribution;
 
 
 public interface Company {
+	
 boolean addEmployeer(Employee eml);
 Employee removeEmployeer(long id);
 Employee getEmployeer(long id);
@@ -47,4 +48,5 @@ List<Employee> getEmployeesBySalary(int salaryFrom, int salaryTo);
 List<Employee> getEmployeesByAge(int ageFrom, int ageTo);
 Employee updateSalary(long id, int newSalary);
 Employee updateDepartment(long id, String department);
+
 }

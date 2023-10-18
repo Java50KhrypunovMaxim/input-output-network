@@ -18,7 +18,7 @@ import telran.employee.Employee;
 import telran.employee.SalaryDistribution;
 
 public class CopmanyImplemention implements Company {
-
+		
 		HashMap<Long, Employee> employees = new HashMap<>(); //most effective structure for the interface methods
 		TreeMap<Integer, Collection<Employee>> employeesSalary = new TreeMap<>();
 		TreeMap<LocalDate, Collection<Employee>> employeesAge = new TreeMap<>();
@@ -172,5 +172,6 @@ public class CopmanyImplemention implements Company {
 			addEmployeer(newEmployee);
 			return newEmployee;
 		}
+		
 
 	}

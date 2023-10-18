@@ -51,14 +51,16 @@ private static Company company;
 	}
 	static void addEmployee(InputOutput io) {
 		long id = io.readLong("Enter employee identity", "Wrong identity", MIN_ID, MAX_ID);
-		String name = io.readString("Enter name", "Wrong name", str -> str.matches("[A-Z][a-z]{2,}"));
+		 if (company.getEmployeer(id) != null) {
+		        io.writeLine("Employee already exists");} else
+		{String name = io.readString("Enter name", "Wrong name", str -> str.matches("[A-Z][a-z]{2,}"));
 		String department = io.readString("Enter department " + Arrays.deepToString(DEPARTMENTS), "Wrong department", new HashSet<String>(List.of(DEPARTMENTS)));
 		int salary = io.readInt("Enter Salary", "Wrong salary", MIN_SALARY, MAX_SALARY);
 		LocalDate birthDate = io.readIsoDate("Enter birtdate in ISO format", "Wrong birthdate",
 		LocalDate.of(MIN_YEAR,1, 1), LocalDate.of(MAX_YEAR,12, 31));
 		Employee empl = new Employee(id, name, department, salary, birthDate);
-		boolean res = company.addEmployeer(empl);
-		io.writeLine(res ? "Employee has been added" : "Employee already exists");
+		boolean res = company.addEmployeer(empl);}
+		
 	}
 static void removeEmployee(InputOutput io) {
 	long id = io.readLong("Enter employee identity", "Wrong identity", MIN_ID, MAX_ID);
@@ -105,7 +107,7 @@ static void updateSalary(InputOutput io) {
 	long id = io.readLong("Enter employee identity", "Wrong identity", MIN_ID, MAX_ID);
 	int salary = io.readInt("Enter new salary", "Wrong salary", MIN_SALARY, MAX_SALARY);
 	company.updateSalary(id, salary);
-	System.out.println("salary was changed successfully");
+	System.out.println("Salary was changed successfully");
 	System.out.println("new salary is " + salary);
 	
 }
