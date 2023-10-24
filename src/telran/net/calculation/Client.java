@@ -46,9 +46,9 @@ static PrintStream writer;
 	    }
 	    private static Item[] getItemsForOperationsWithDates() {
 	        return new Item[] {
-	            Item.of("Date after a given number of days", io1 ->runProtocolDateAfterBefore ("After", io1)),
+	            Item.of("Date after a given number of days", io1 -> runProtocolDateAfterBefore ("After", io1)),
 	            Item.of("Date before a given number of days",io1 -> runProtocolDateAfterBefore ("Before", io1)),
-	            Item.of("Days beetwen two dates", io1 -> runProtocolDateBetween ("Between", io1)),
+	            Item.of("Days beetwen two dates", io1 -> runProtocolDateAfterBefore ("Between", io1)),
 	            Item.exit()
 	        };
 	    }
@@ -94,12 +94,13 @@ static void runProtocolDateAfterBefore (String type, InputOutput io) {
 	
 	LocalDate startDate = io.readIsoDate("Enter the start date (yyyy-MM-dd):", "Wrong date");
 	int amountOfDays = io.readInt("Enter the number of days:", "Wrong number");;
-	writer.printf("%s#%s#%d\n", type, startDate, amountOfDays);
+	writer.printf("%s#%s#%d\n", type, startDate.toString(), amountOfDays);
 	try {
 		io.writeLine(reader.readLine());
 	} catch (IOException e) {
 		
 	}
 }
+
 	
 }

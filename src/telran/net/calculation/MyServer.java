@@ -73,28 +73,7 @@ public class MyServer {
 			                        response = "Division by zero is not allowed";
 			                    }break;
 			                case "After":
-			                	 String dateStr = tokens[1];
-			                	    String daysStr = tokens[2];
-
-			                	    LocalDate date1;
-			                	    int daysToAdd;
-
-			                	    try {
-			                	        date1 = LocalDate.parse(dateStr);
-			                	        daysToAdd = Integer.parseInt(daysStr);
-
-			                	        if (daysToAdd >= 0) {
-			                	            LocalDate resultDate = date1.plusDays(daysToAdd);
-			                	            response = resultDate.toString();
-			                	        } else {
-			                	            response = "Number of days must be non-negative.";
-			                	        }
-			                	    } catch (DateTimeParseException e) {
-			                	        response = "Invalid date format. Please enter a date in the format 'yyyy-MM-dd'.";
-			                	    } catch (NumberFormatException e) {
-			                	        response = "Invalid number format. Please enter a valid number of days.";
-			                	    }
-			                	    break;
+			                	response = LocalDate.now().plusDays(Long.parseLong(tokens[1])).toString();
 
 			                case "Before":
 			                    LocalDate date2 = LocalDate.parse(tokens[1]);
