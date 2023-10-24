@@ -48,7 +48,7 @@ static PrintStream writer;
 	        return new Item[] {
 	            Item.of("Date after a given number of days", io1 -> runProtocolDateAfterBefore ("After", io1)),
 	            Item.of("Date before a given number of days",io1 -> runProtocolDateAfterBefore ("Before", io1)),
-	            Item.of("Days beetwen two dates", io1 -> runProtocolDateAfterBefore ("Between", io1)),
+	            Item.of("Days beetwen two dates", io1 ->  runProtocolDateBetween ("Between", io1)),
 	            Item.exit()
 	        };
 	    }
@@ -104,3 +104,5 @@ static void runProtocolDateAfterBefore (String type, InputOutput io) {
 
 	
 }
+
+	
