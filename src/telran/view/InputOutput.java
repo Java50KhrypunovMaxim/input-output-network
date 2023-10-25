@@ -1,6 +1,8 @@
 package telran.view;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Function;
@@ -87,10 +89,11 @@ public interface InputOutput {
 	default String readString(String prompt, String errorPrompt, HashSet<String> options){
 		return readString(prompt, errorPrompt, options::contains);
 	}
-	default LocalDate readIsoDate(String prompt, String errorPrompt){
+		default LocalDate readIsoDate(String prompt, String errorPrompt){
 		
 		return readObject(prompt, errorPrompt, LocalDate::parse);
 	}
+	
 	default LocalDate readIsoDate(String prompt, String errorPrompt, LocalDate min, LocalDate max){
 		return readObject(prompt, errorPrompt, string -> {
 			LocalDate res = LocalDate.parse(string);

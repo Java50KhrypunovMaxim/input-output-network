@@ -53,36 +53,34 @@ public class MyServer {
 			    } else {
 			        try {
 			            String type = tokens[0];
-			            double number1 = Double.parseDouble(tokens[1]);
-			            double number2 = Double.parseDouble(tokens[2]);
 
 			            switch (type) {
 			                case "Add":
-			                    response = String.valueOf(number1 + number2);
+			                    response = String.valueOf(Double.parseDouble(tokens[1]) + Double.parseDouble(tokens[2]));
 			                    break;
 			                case "Subtract":
-			                    response = String.valueOf(number1 - number2);
+			                    response = String.valueOf(Double.parseDouble(tokens[1]) - Double.parseDouble(tokens[2]));
 			                    break;
 			                case "Multiply":
-			                    response = String.valueOf(number1 * number2);
+			                    response = String.valueOf(Double.parseDouble(tokens[1]) * Double.parseDouble(tokens[2]));
 			                    break;
 			                case "Divide":
-			                    if (number2 != 0) {
-			                        response = String.valueOf(number1 / number2);
+			                    if (Double.parseDouble(tokens[2]) != 0) {
+			                        response = String.valueOf(Double.parseDouble(tokens[1]) / Double.parseDouble(tokens[2]));
 			                    } else {
 			                        response = "Division by zero is not allowed";
 			                    }break;
 			                case "After":
-			                    LocalDate date1 = LocalDate.parse(tokens[1]);
-			                    int daysToAdd = Integer.parseInt(tokens[2]);
-			                    LocalDate resultDate = date1.plusDays(daysToAdd);
+			                	LocalDate date = LocalDate.parse(tokens[1]);
+			                    int daysToSubtract = Integer.parseInt(tokens[2]);
+			                    LocalDate resultDate = date.plusDays(daysToSubtract);
 			                    response = resultDate.toString();
 			                    break;
 
 			                case "Before":
 			                    LocalDate date2 = LocalDate.parse(tokens[1]);
-			                    int daysToSubtract = Integer.parseInt(tokens[2]);
-			                    LocalDate resultDate2 = date2.minusDays(daysToSubtract);
+			                    int daysToSubtract2 = Integer.parseInt(tokens[2]);
+			                    LocalDate resultDate2 = date2.minusDays(daysToSubtract2);
 			                    response = resultDate2.toString();
 			                    break;
 

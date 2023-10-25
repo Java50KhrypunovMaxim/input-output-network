@@ -20,14 +20,27 @@ static BufferedReader reader;
 static PrintStream writer;
 	public static void main(String[] args) throws Exception{
 		InputOutput io = new ConsoleInputOutput();
-		Socket socket = new Socket(HOST, PORT);
-		reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		writer = new PrintStream(socket.getOutputStream());
-		 Item[] items = getItems();
+		Socket socket = null;
+		try {
+	        socket = new Socket(HOST, PORT);
+	        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+	        writer = new PrintStream(socket.getOutputStream());
+	        
+	        Item[] items = getItems();
 	        Menu menu = new Menu("Operations", items);
 	        menu.perform(new ConsoleInputOutput());
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    } finally {
+	        if (socket != null && !socket.isClosed()) {
+	            try {
+	                socket.close();
+	            } catch (IOException e) {
+	                e.printStackTrace();
+	            }
+	        }
 	    }
-
+	}
 	    private static Item[] getItems() {
 	        Item numberOperationsItem = Item.of("Number Operations", io -> {
 	            Menu numberMenu = new Menu("Number Operations", getItemsForOperationsWithNumbers());
@@ -64,7 +77,6 @@ static PrintStream writer;
 	  
 	
 	static void runProtocol(String type, InputOutput io) {
-		
 		double[] operands = getOperands(io);
 		writer.printf("%s#%s#%s\n", type, operands[0], operands[1]);
 		try {
@@ -81,9 +93,8 @@ static PrintStream writer;
 	}
 static void runProtocolDateBetween (String type, InputOutput io) {
 		
-		LocalDate startDate = io.readIsoDate("Enter the start date (yyyy-MM-dd):", "Wrong date");
-        LocalDate endDate = io.readIsoDate("Enter the end date (yyyy-MM-dd):", "Wrong date");
-		writer.printf("%s#%s#%s\n", type, startDate, endDate);
+		LocalDate[] operands = getOperandsDay(io);	
+		writer.printf("%s#%s#%s\n", type, operands[0], operands[1]);
 		try {
 			io.writeLine(reader.readLine());
 		} catch (IOException e) {
@@ -101,5 +112,13 @@ static void runProtocolDateAfterBefore (String type, InputOutput io) {
 		
 	}
 }
+
+private static LocalDate[] getOperandsDay (InputOutput io) {
+    return new LocalDate[] {
+    		io.readIsoDate("Enter the start date (yyyy-MM-dd):", "Wrong date"),
+    		io.readIsoDate("Enter the end date (yyyy-MM-dd):", "Wrong date"),
+    };
 }
+}
+
 	
